@@ -238,10 +238,19 @@ jobs:
           tar -c -z -f ${{ runner.temp }}/curl-impersonate-${{ github.ref_name }}.${{ matrix.host }}.tar.gz curl-impersonate-ff curl-impersonate-chrome curl_*
           echo "release_file_bin=${{ runner.temp }}/curl-impersonate-${{ github.ref_name }}.${{ matrix.host }}.tar.gz" >> $GITHUB_ENV
 
-      - name: Upload release files
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+      # - name: Upload release files
+      #   uses: softprops/action-gh-release@v1
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   with:
+      #     files: |
+      #         ${{ env.release_file_lib }}
+      #         ${{ env.release_file_bin }}
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
         with:
-          files: |
-              ${{ env.release_file_lib }}
-              ${{ env.release_file_bin }}
+          repo_token: ${{ secrets.PAT }}
+          file: ${{ env.release_file_bin }}
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
