@@ -27,8 +27,8 @@ jobs:
             capture_interface: eth0
             make: make
           - os: ubuntu-20.04
-            arch: armv5
-            host: arm-linux-gnueabihf
+            arch: arm
+            host: arm-linux-gnueabi
             capture_interface: eth0
             make: make
 
