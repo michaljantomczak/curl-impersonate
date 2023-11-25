@@ -31,11 +31,6 @@ jobs:
             host: arm-linux-gnueabihf
             capture_interface: eth0
             make: make
-          - os: ubuntu-20.04
-            arch: s390x
-            host: s390x-linux-gnu
-            capture_interface: eth0
-            make: make
 
     steps:
       - uses: actions/setup-python@v4
